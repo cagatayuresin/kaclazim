@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <title>kaç lazım | cagatayuresin</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compitable" content="ie-edge">
+    <link rel="stylesheet" href="stylesheet.css">
+    <meta name="description" content="vize notun belli de dersten geçmen için finalden kaç almak lazım" />
+    <meta name="author" content="Çağatay ÜRESİN">
+    <meta name="keywords"
+        content="vize, final, lazım, kaç, puan, hesap, not, puan, cagatayuresin, çağatay, üresin, curesin">
+    <meta name="robots" content="index">
+    <meta property="og:title" content="kac lazim">
+    <meta property="og:description" content="vize notun belli de dersten geçmen için finalden kaç almak lazım">
+    <meta property="og:url" content="https">
+    <link rel="shortcut icon" type="image/x-icon"
+        href="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/favicon.ico">
+</head>
+
+<body>
+    <div id="thefilterdiv">
+        <svg id="filters">
+            <defs>
+                <filter id="threshold">
+                    <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0
+                                        0 1 0 0 0
+                                        0 0 1 0 0
+                                        0 0 0 255 -140" />
+                </filter>
+            </defs>
+        </svg>
+    </div>
+    <div id="container">
+        <span id="text1"></span>
+        <span id="text2"></span>
+    </div>
+    <div id="formdiv">
+        <form action="/" method="POST">
+            <label for="final_baraji">final barajı</label><br>
+            <input type="text" name="final_baraji" id="final_baraji" value="50"><br>
+            <label for="gecme_notu">geçme notu</label><br>
+            <input type="text" name="gecme_notu" id="gecme_notu" value="50"><br>
+            <label for="final_etki_yuzdesi">finalin yüzdelik etkisi</label><br>
+            <input type="text" name="final_etki_yuzde" id="final_etki_yuzde" value="60"><br>
+            <label for="vize_notu" id="vize_notu_label">vize notun</label><br>
+            <input type="text" name="vize_notu" id="vize_notu"><br><br>
+            <input type="button" onclick="kaclazim();" name="hesabla_butonu" id="hesapla_butonu" value="hesapla"><br><br>
+            <p id="sonuc">sana şu lazım<br><p id="donut">vize notu</p></p>
+        </form>
+    </div>
+    <div id="curesinlogodiv">
+        <img id="curesinlogo"
+            src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/curesinlogo.png">
+        <div class="curesincom">cagatayuresin</div>
+        <div>
+            <tr>
+                <td><a href="https://twitter.com/cagatayuresin" target="_blank"><img class="socialcom"
+                            src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/twittericon65.png"></a>
+                </td>
+            </tr>
+            <tr>
+                <td><a href="https://www.instagram.com/cagatayuresin/" target="_blank"><img class="socialcom"
+                            src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/instagramicon65.png"></a>
+                </td>
+            </tr>
+            <tr>
+                <td><a href="https://www.linkedin.com/in/cagatayuresin/" target="_blank"><img class="socialcom"
+                            src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/linkedinicon65.png"></a>
+                </td>
+            </tr>
+            <tr>
+                <td><a href="https://www.youtube.com/channel/UCoRQRnEjfym6PC5bLN9Gy8w" target="_blank"><img
+                            class="socialcom"
+                            src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/youtubeicon65.png"></a>
+                </td>
+            </tr>
+            <tr>
+                <td><a href="https://github.com/cagatayuresin" target="_blank"><img class="socialcom"
+                            src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/githubicon65.png"></a>
+                </td>
+            </tr>
+        </div>
+    </div>
+
+    <div id="footer">
+        <p id="info">
+            <strong>sorumluluk reddi</strong><br>
+            bu hesaplamanın hukuken bir geçerliliği yoktur<br>
+            hesaplanan puanın üzerinde alsan bile çan eğrisinden alacağın harf notu ile kalabilirsin, kısmet<br>
+            git bak kağıdına ama fazla puan verdiyse siler
+        </p>
+        <p id="surum">
+            <em>sürüm: 1.2</em>
+        </p>
+    </div>
+</body>
+<script type="text/javascript" src="main.js"></script>
+
+</html>

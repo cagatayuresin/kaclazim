@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400&display=swap');
+
+body {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 300;
+    text-align: center;
+    margin: auto;
+}
+
+#container {
+    margin-top: 5px;
+    width: 100%;
+    height: 20px;
+    filter: url(#threshold) blur(0.6px);
+}
+
+#thefilterdiv {
+    position: static;
+    height: 1px;
+}
+
+#text1, #text2 {
+    position:absolute;
+    top: 0px;
+    left:0px;
+    width: 100%;
+    font-size: 20pt;
+    user-select: none;
+}
+
+#formdiv {
+    padding: 40px;
+}
+
+input {
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    outline: none;
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    width: 5em;
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+
+#hesapla_butonu {
+    font-size: 18px;
+}
+
+#hesapla_butonu:hover {
+    color: white;
+    background-color: black;
+}
+
+#vize_notu, #vize_notu_label {
+    font-size: 25px;
+}
+
+#sonuc, #donut {
+    margin-top: -25px;
+    font-size: 20px;
+}
+
+#curesinlogo {
+    height: 40px;
+}
+
+#curesinlogodiv {
+    width: 100%;
+}
+
+.socialcom {
+    width: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.socialcom:hover {
+    opacity: 0.5;
+}
+
+.curesincom {
+    font-size: 10pt;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
+    width: 95%;
+}
+
+#info, #surum {
+    font-size: 10px;
+}
+#footer {
+    width: 100%;
+}
