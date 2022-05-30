@@ -181,7 +181,10 @@ function kaclazim() {
   let gecme_notu = document.getElementById("gecme_notu").value;
   let final_etki_yuzde = document.getElementById("final_etki_yuzde").value;
 
-  if (
+  if(vize_notu == "elif"){
+    document.getElementById("donut").innerHTML = "Bi' tanem ❤️";
+  }
+  else if (
     vize_notu < 0 ||
     vize_notu > 100 ||
     final_baraji < 0 ||
@@ -194,7 +197,7 @@ function kaclazim() {
     isNaN(final_baraji) ||
     isNaN(final_etki_yuzde) ||
     isNaN(gecme_notu)
-  ) {
+  ){
     document.getElementById("donut").innerHTML = "bes kardes";
   } else {
     let final_not_en_az;
