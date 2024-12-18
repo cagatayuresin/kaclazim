@@ -103,8 +103,8 @@ var texts = [
   "---",
 ];
 
-const morphTime = 1.5;
-const cooldownTime = 0.05;
+const morphTime = 1;
+const cooldownTime = 0.5;
 
 let textIndex = texts.length - 1;
 let time = new Date();
