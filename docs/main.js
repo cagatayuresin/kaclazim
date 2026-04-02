@@ -154,7 +154,7 @@ function kaclazim() {
     final_not_en_az =
       (100 * (gecme_notu - vize_notu) + final_etki_yuzde * vize_notu) /
       final_etki_yuzde;
-      
+
     if (final_not_en_az <= final_baraji) {
       document.getElementById("donut").innerHTML = final_baraji.toString();
     } else {
@@ -162,3 +162,84 @@ function kaclazim() {
     }
   }
 }
+
+// Local Storage & Course Management Blocks
+let savedCourses = JSON.parse(localStorage.getItem("kaclazim_courses")) || {};
+let activeCourse = null;
+
+function loadCourses() {
+    const dersListesi = document.getElementById("ders_listesi");
+    dersListesi.innerHTML = "";
+
+    const courses = Object.keys(savedCourses);
+
+    courses.forEach(courseName => {
+        const chip = document.createElement("div");
+        chip.className = "ders-chip";
+        if (courseName === activeCourse) {
+            chip.classList.add("active");
+        }
+        chip.innerText = courseName;
+        chip.onclick = () => dersYukle(courseName);
+        dersListesi.appendChild(chip);
+    });
+}
+
+function dersKaydet() {
+    const dersAdi = document.getElementById("ders_adi").value.trim();
+    if (!dersAdi) {
+        alert("lütfen kaydetmek için bir ders adı girin.");
+        return;
+    }
+
+    const data = {
+        final_baraji: document.getElementById("final_baraji").value,
+        gecme_notu: document.getElementById("gecme_notu").value,
+        final_etki_yuzde: document.getElementById("final_etki_yuzde").value,
+        vize_notu: document.getElementById("vize_notu").value
+    };
+
+    savedCourses[dersAdi] = data;
+    localStorage.setItem("kaclazim_courses", JSON.stringify(savedCourses));
+    activeCourse = dersAdi;
+
+    loadCourses();
+}
+
+function dersYukle(courseName) {
+    if (!savedCourses[courseName]) return;
+
+    activeCourse = courseName;
+    const data = savedCourses[courseName];
+
+    document.getElementById("ders_adi").value = courseName;
+    document.getElementById("final_baraji").value = data.final_baraji;
+    document.getElementById("gecme_notu").value = data.gecme_notu;
+    document.getElementById("final_etki_yuzde").value = data.final_etki_yuzde;
+    document.getElementById("vize_notu").value = data.vize_notu;
+
+    loadCourses();
+    kaclazim();
+}
+
+function dersSil() {
+    const dersAdi = document.getElementById("ders_adi").value.trim();
+    if (!dersAdi) return;
+
+    if (savedCourses[dersAdi]) {
+        delete savedCourses[dersAdi];
+        localStorage.setItem("kaclazim_courses", JSON.stringify(savedCourses));
+
+        if (activeCourse === dersAdi) {
+            activeCourse = null;
+            document.getElementById("ders_adi").value = "";
+        }
+
+        loadCourses();
+    }
+}
+
+// Initial load
+window.onload = function() {
+    loadCourses();
+};

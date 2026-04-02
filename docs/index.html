@@ -37,8 +37,11 @@
         <span id="text1"></span>
         <span id="text2"></span>
     </div>
+    <div id="ders_listesi"></div>
     <div id="formdiv">
-        <form action="/" method="POST">
+        <form action="/" method="POST" onsubmit="return false;">
+            <label for="ders_adi">ders adı (isteğe bağlı)</label><br>
+            <input type="text" name="ders_adi" id="ders_adi" placeholder="matematik"><br>
             <label for="final_baraji">final barajı</label><br>
             <input type="text" name="final_baraji" id="final_baraji" value="50"><br>
             <label for="gecme_notu">geçme notu</label><br>
@@ -47,7 +50,11 @@
             <input type="text" name="final_etki_yuzde" id="final_etki_yuzde" value="60"><br>
             <label for="vize_notu" id="vize_notu_label">vize notun</label><br>
             <input type="text" name="vize_notu" id="vize_notu"><br><br>
-            <input type="button" onclick="kaclazim();" name="hesabla_butonu" id="hesapla_butonu" value="hesapla"><br><br>
+            <div id="button_group">
+                <input type="button" onclick="kaclazim();" name="hesabla_butonu" id="hesapla_butonu" value="hesapla">
+                <input type="button" onclick="dersKaydet();" name="kaydet_butonu" id="kaydet_butonu" value="kaydet">
+                <input type="button" onclick="dersSil();" name="sil_butonu" id="sil_butonu" value="sil">
+            </div><br>
             <p id="sonuc">sana şu lazım<br><p id="donut">vize notu</p></p>
         </form>
     </div>
