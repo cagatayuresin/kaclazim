@@ -44,13 +44,44 @@ input {
     margin-bottom: 10px;
 }
 
-#hesapla_butonu {
+#button_group input {
     font-size: 18px;
+    margin: 0 5px;
+    cursor: pointer;
+    background-color: white;
 }
 
-#hesapla_butonu:hover {
+#button_group input:hover {
     color: white;
     background-color: black;
+}
+
+#ders_listesi {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 60px;
+    max-width: 100%;
+}
+
+.ders-chip {
+    padding: 5px 15px;
+    border: 1px solid black;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.ders-chip:hover {
+    background-color: black;
+    color: white;
+}
+
+.ders-chip.active {
+    background-color: black;
+    color: white;
 }
 
 #vize_notu, #vize_notu_label {
