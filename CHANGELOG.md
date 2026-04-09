@@ -2,6 +2,16 @@
 
 Projedeki tüm önemli değişiklikler bu dosyada kayıt altına alınacaktır.
 
+## [2.2] - 2026-04-09
+### Eklenenler
+- **PWA Desteği:** Uygulama artık telefona yüklenebilir ve internetsiz (offline) çalışabilir.
+- **Web Manifest:** Tema renkleri ve ikon yapılandırmaları eklendi.
+
+### Değişenler
+- **Gelişmiş Mantık:** Hesaplama sonuçları artık yukarı yuvarlanıyor (`Math.ceil`).
+- **Input İyileştirmeleri:** Mobil cihazlarda sayı klavyesini açan `type="number"` düzenlemesi yapıldı.
+- **Veri Doğrulama:** Daha sıkı giriş kontrolleri ve hata mesajları eklendi.
+
 ## [2.1] - 2026-04-09
 ### Kaldırılanlar
 - SonarCloud/SonarLint yapılandırması tamamen temizlendi.

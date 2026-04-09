@@ -13,14 +13,15 @@ Kaç Lazım?, öğrencilerin akademik stresini bir nebze olsun azaltmak (veya ge
 
 ## 🚀 Özellikler
 
-- ✅ **Anlık Hesaplama:** Vize notunuzu ve kriterleri girin, sonucu anında görün.
+- 📱 **PWA (Progressive Web App):** Uygulamayı telefonunuza yükleyebilir ve **internetsiz (offline)** kullanabilirsiniz.
+- ✅ **Anlık ve Kesin Hesaplama:** Girişlerinize göre gereken puanı anında hesaplar ve yukarı yuvarlar (Örn: 34.2 lazımsa 35 almanız gerektiğini söyler).
 - 💾 **Ders Kaydetme:** Farklı dersleriniz için vize notlarını ve kriterleri kaydedin, sonra tekrar bakın.
 - ⚙️ **Özelleştirilebilir Kriterler:**
     - Final Barajı
     - Geçme Notu
     - Finalin Etki Yüzdesi
-- 🎨 **Modern Arayüz:** Dinamik metin animasyonları ve şık tasarım.
-- 📱 **Mobil Uyumlu:** Her cihazda rahatça kullanılabilir.
+- 🎨 **Modern ve Hızlı Arayüz:** Sade ve odaklanmış kullanıcı deneyimi.
+- ⌨️ **Mobil Uyumlu Girişler:** Sayı girişi alanlarında otomatik olarak sayı klavyesi açılır.
 
 ## 🛠️ Kullanılan Teknolojiler
 

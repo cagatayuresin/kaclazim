@@ -18,6 +18,8 @@
     <script src="https://kit.fontawesome.com/4ed1a77e89.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" type="image/x-icon"
         href="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/favicon.ico">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000">
 </head>
 
 <body>
@@ -43,19 +45,21 @@
             <label for="ders_adi">ders adı (isteğe bağlı)</label><br>
             <input type="text" name="ders_adi" id="ders_adi" placeholder="matematik"><br>
             <label for="final_baraji">final barajı</label><br>
-            <input type="text" name="final_baraji" id="final_baraji" value="50"><br>
+            <input type="number" name="final_baraji" id="final_baraji" value="50" min="0" max="100"><br>
             <label for="gecme_notu">geçme notu</label><br>
-            <input type="text" name="gecme_notu" id="gecme_notu" value="50"><br>
+            <input type="number" name="gecme_notu" id="gecme_notu" value="50" min="0" max="100"><br>
             <label for="final_etki_yuzdesi">finalin yüzdelik etkisi</label><br>
-            <input type="text" name="final_etki_yuzde" id="final_etki_yuzde" value="60"><br>
+            <input type="number" name="final_etki_yuzde" id="final_etki_yuzde" value="60" min="0" max="100"><br>
             <label for="vize_notu" id="vize_notu_label">vize notun</label><br>
-            <input type="text" name="vize_notu" id="vize_notu"><br><br>
+            <input type="number" name="vize_notu" id="vize_notu" min="0" max="100"><br><br>
             <div id="button_group">
                 <input type="button" onclick="kaclazim();" name="hesabla_butonu" id="hesapla_butonu" value="hesapla">
                 <input type="button" onclick="dersKaydet();" name="kaydet_butonu" id="kaydet_butonu" value="kaydet">
                 <input type="button" onclick="dersSil();" name="sil_butonu" id="sil_butonu" value="sil">
             </div><br>
-            <p id="sonuc">sana şu lazım<br><p id="donut">vize notu</p></p>
+            <p id="sonuc">sana şu lazım<br>
+            <p id="donut">vize notu</p>
+            </p>
         </form>
     </div>
     <div id="curesinlogodiv">
@@ -100,10 +104,17 @@
             git bak kağıdına ama fazla puan verdiyse siler
         </p>
         <p id="surum">
-            <em>sürüm: 2.1</em>
+            <em>sürüm: 2.2</em>
         </p>
     </div>
 </body>
 <script type="text/javascript" src="main.js"></script>
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js');
+        });
+    }
+</script>
 
 </html>

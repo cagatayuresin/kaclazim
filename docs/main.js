@@ -25,7 +25,7 @@ var texts = [
   "kabul edin olm",
   "---",
   "yazın verirsin",
-  "---",,
+  "---",
   "seneye verirsin nolcak",
   "---",
   "nasıl tasarım ama",
@@ -125,40 +125,45 @@ animate();
 // ------------------
 
 function kaclazim() {
-  let vize_notu = document.getElementById("vize_notu").value;
-  let final_baraji = document.getElementById("final_baraji").value;
-  let gecme_notu = document.getElementById("gecme_notu").value;
-  let final_etki_yuzde = document.getElementById("final_etki_yuzde").value;
+  const vize_notu = parseFloat(document.getElementById("vize_notu").value);
+  const final_baraji = parseFloat(document.getElementById("final_baraji").value);
+  const gecme_notu = parseFloat(document.getElementById("gecme_notu").value);
+  const final_etki_yuzde = parseFloat(document.getElementById("final_etki_yuzde").value);
 
-  if(vize_notu == "elif"){
+  if (document.getElementById("vize_notu").value.toLowerCase() === "elif") {
     document.getElementById("donut").innerHTML = "Bi' tanem ❤️";
+    return;
   }
-  else if (
-    vize_notu < 0 ||
-    vize_notu > 99 ||
-    final_baraji < 0 ||
-    final_baraji > 100 ||
-    final_etki_yuzde < 0 ||
-    final_etki_yuzde > 100 ||
-    gecme_notu < 0 ||
-    gecme_notu > 100 ||
-    isNaN(vize_notu) ||
-    isNaN(final_baraji) ||
-    isNaN(final_etki_yuzde) ||
-    isNaN(gecme_notu)
-  ){
-    document.getElementById("donut").innerHTML = 'bes kardes <i class="fa-solid fa-hand fa-shake"></i>';
+
+  if (
+    isNaN(vize_notu) || vize_notu < 0 || vize_notu > 100 ||
+    isNaN(final_baraji) || final_baraji < 0 || final_baraji > 100 ||
+    isNaN(gecme_notu) || gecme_notu < 0 || gecme_notu > 100 ||
+    isNaN(final_etki_yuzde) || final_etki_yuzde <= 0 || final_etki_yuzde > 100
+  ) {
+    document.getElementById("donut").innerHTML = 'beş kardeş <i class="fa-solid fa-hand fa-shake"></i>';
   } else {
-    let final_not_en_az;
+    // Hesaplama: (Vize * (100 - Etki) / 100) + (Final * Etki / 100) >= GeçmeNotu
+    // Final * Etki / 100 >= GeçmeNotu - (Vize * (100 - Etki) / 100)
+    // Final >= (GeçmeNotu - (Vize * (100 - Etki) / 100)) * 100 / Etki
+    
+    const vize_etki = 100 - final_etki_yuzde;
+    let final_not_en_az = (gecme_notu - (vize_notu * vize_etki / 100)) * 100 / final_etki_yuzde;
 
-    final_not_en_az =
-      (100 * (gecme_notu - vize_notu) + final_etki_yuzde * vize_notu) /
-      final_etki_yuzde;
+    // Sonuç barajın altındaysa baraj geçerlidir
+    if (final_not_en_az < final_baraji) {
+      final_not_en_az = final_baraji;
+    }
 
-    if (final_not_en_az <= final_baraji) {
-      document.getElementById("donut").innerHTML = final_baraji.toString();
+    // Puanı yukarı yuvarla (örn: 34.1 lazımsa 35 almalı)
+    const sonuc = Math.ceil(final_not_en_az);
+
+    if (sonuc > 100) {
+      document.getElementById("donut").innerHTML = sonuc + " (geçmiş olsun 💀)";
+    } else if (sonuc <= 0) {
+      document.getElementById("donut").innerHTML = "0 (geçtin bile 🎉)";
     } else {
-      document.getElementById("donut").innerHTML = final_not_en_az.toString();
+      document.getElementById("donut").innerHTML = sonuc.toString();
     }
   }
 }

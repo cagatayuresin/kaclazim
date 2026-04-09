@@ -19,10 +19,11 @@ body {
     height: 1px;
 }
 
-#text1, #text2 {
-    position:absolute;
+#text1,
+#text2 {
+    position: absolute;
     top: 0px;
-    left:0px;
+    left: 0px;
     width: 100%;
     font-size: 20pt;
     user-select: none;
@@ -84,11 +85,13 @@ input {
     color: white;
 }
 
-#vize_notu, #vize_notu_label {
+#vize_notu,
+#vize_notu_label {
     font-size: 25px;
 }
 
-#sonuc, #donut {
+#sonuc,
+#donut {
     margin-top: -25px;
     font-size: 20px;
 }
@@ -120,9 +123,11 @@ input {
     width: 95%;
 }
 
-#info, #surum {
+#info,
+#surum {
     font-size: 10px;
 }
+
 #footer {
     width: 100%;
 }
