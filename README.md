@@ -1,11 +1,23 @@
 # 🎓 Kaç Lazım?
 
-[![GitHub license](https://img.shields.io/github/license/cagatayuresin/kaclazim?style=for-the-badge)](https://github.com/cagatayuresin/kaclazim/blob/main/LICENSE)
-[![GitHub repo size](https://img.shields.io/github/repo-size/cagatayuresin/kaclazim?style=for-the-badge)](https://github.com/cagatayuresin/kaclazim)
-[![GitHub stars](https://img.shields.io/github/stars/cagatayuresin/kaclazim?style=for-the-badge)](https://github.com/cagatayuresin/kaclazim/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/cagatayuresin/kaclazim?style=for-the-badge)](https://github.com/cagatayuresin/kaclazim/network/members)
+<div align="center">
+
+[![Build Status](https://img.shields.io/github/actions/workflow/status/cagatayuresin/kaclazim/build.yml?branch=main&style=flat&label=build&logo=github)](https://github.com/cagatayuresin/kaclazim/actions)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=cagatayuresin_kaclazim&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=cagatayuresin_kaclazim)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=cagatayuresin_kaclazim&metric=coverage)](https://sonarcloud.io/summary/new_code?id=cagatayuresin_kaclazim)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=cagatayuresin_kaclazim&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=cagatayuresin_kaclazim)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=cagatayuresin_kaclazim&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=cagatayuresin_kaclazim)
+
+[![GitHub license](https://img.shields.io/github/license/cagatayuresin/kaclazim?style=flat)](https://github.com/cagatayuresin/kaclazim/blob/main/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/cagatayuresin/kaclazim?style=flat)](https://github.com/cagatayuresin/kaclazim/stargazers)
+[![PWA Status](https://img.shields.io/badge/PWA-Ready-orange?style=flat&logo=pwa)](https://cagatayuresin.github.io/kaclazim/)
+
+</div>
 
 **"Vize notun belli de, dersten geçmen için finalden kaç alman lazım?"**
+
+...
+
 
 Kaç Lazım?, öğrencilerin akademik stresini bir nebze olsun azaltmak (veya gerçeklerle yüzleştirmek) için tasarlanmış, modern ve kullanıcı dostu bir not hesaplama aracıdır.
 
