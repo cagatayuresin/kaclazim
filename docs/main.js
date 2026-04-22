@@ -124,10 +124,10 @@ animate();
 // ------------------
 
 function kaclazim() {
-  const vize_notu = parseFloat(document.getElementById("vize_notu").value);
-  const final_baraji = parseFloat(document.getElementById("final_baraji").value);
-  const gecme_notu = parseFloat(document.getElementById("gecme_notu").value);
-  const final_etki_yuzde = parseFloat(document.getElementById("final_etki_yuzde").value);
+  const vize_notu = Number.parseFloat(document.getElementById("vize_notu").value);
+  const final_baraji = Number.parseFloat(document.getElementById("final_baraji").value);
+  const gecme_notu = Number.parseFloat(document.getElementById("gecme_notu").value);
+  const final_etki_yuzde = Number.parseFloat(document.getElementById("final_etki_yuzde").value);
 
   if (document.getElementById("vize_notu").value.toLowerCase() === "elif") {
     document.getElementById("donut").innerHTML = "Bi' tanem ❤️";
@@ -135,10 +135,10 @@ function kaclazim() {
   }
 
   if (
-    isNaN(vize_notu) || vize_notu < 0 || vize_notu > 100 ||
-    isNaN(final_baraji) || final_baraji < 0 || final_baraji > 100 ||
-    isNaN(gecme_notu) || gecme_notu < 0 || gecme_notu > 100 ||
-    isNaN(final_etki_yuzde) || final_etki_yuzde <= 0 || final_etki_yuzde > 100
+    Number.isNaN(vize_notu) || vize_notu < 0 || vize_notu > 100 ||
+    Number.isNaN(final_baraji) || final_baraji < 0 || final_baraji > 100 ||
+    Number.isNaN(gecme_notu) || gecme_notu < 0 || gecme_notu > 100 ||
+    Number.isNaN(final_etki_yuzde) || final_etki_yuzde <= 0 || final_etki_yuzde > 100
   ) {
     document.getElementById("donut").innerHTML = 'beş kardeş <i class="fa-solid fa-hand fa-shake"></i>';
   } else {
@@ -244,6 +244,6 @@ function dersSil() {
 }
 
 // Initial load
-window.onload = function() {
+globalThis.onload = function() {
     loadCourses();
 };

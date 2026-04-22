@@ -8,15 +8,24 @@ const ASSETS_TO_CACHE = [
 ];
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS_TO_CACHE))
-  );
+  event.waitUntil((async () => {
+    try {
+      const cache = await caches.open(CACHE_NAME);
+      await cache.addAll(ASSETS_TO_CACHE);
+    } catch (error) {
+      console.error('Service Worker install failed:', error);
+    }
+  })());
 });
 
 self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request).then((response) => {
+  event.respondWith((async () => {
+    try {
+      const response = await caches.match(event.request);
       return response || fetch(event.request);
-    })
-  );
+    } catch (error) {
+      console.error('Service Worker fetch failed:', error);
+      return fetch(event.request);
+    }
+  })());
 });

@@ -9,11 +9,11 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="kaç lazım">
-  <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/curesinlogo.png">
+  <link rel="apple-touch-icon" crossorigin="anonymous" href="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/curesinlogo.png">
   <link rel="manifest" href="data:application/json;charset=utf-8,%7B%22name%22%3A%22ka%C3%A7%20laz%C4%B1m%22%2C%22short_name%22%3A%22ka%C3%A7%20laz%C4%B1m%22%2C%22description%22%3A%22vize%20notun%20belli%20de%20finalden%20ka%C3%A7%20alman%20laz%C4%B1m%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23ffffff%22%2C%22theme_color%22%3A%22%23000000%22%2C%22orientation%22%3A%22portrait%22%7D">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" crossorigin="anonymous">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -472,24 +472,24 @@
     </p>
 
     <div class="left-footer">
-      <img class="curesin-logo" src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/curesinlogo.png" alt="cagatayuresin">
+      <img class="curesin-logo" src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/curesinlogo.png" alt="cagatayuresin" crossorigin="anonymous">
       <div class="left-footer-right">
         <div class="curesin-name">cagatayuresin</div>
         <div class="social-links">
           <a href="https://twitter.com/cagatayuresin" target="_blank">
-            <img src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/twittericon65.png" alt="Twitter">
+            <img src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/twittericon65.png" alt="Twitter" crossorigin="anonymous">
           </a>
           <a href="https://www.instagram.com/cagatayuresin/" target="_blank">
-            <img src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/instagramicon65.png" alt="Instagram">
+            <img src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/instagramicon65.png" alt="Instagram" crossorigin="anonymous">
           </a>
           <a href="https://www.linkedin.com/in/cagatayuresin/" target="_blank">
-            <img src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/linkedinicon65.png" alt="LinkedIn">
+            <img src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/linkedinicon65.png" alt="LinkedIn" crossorigin="anonymous">
           </a>
           <a href="https://www.youtube.com/channel/UCoRQRnEjfym6PC5bLN9Gy8w" target="_blank">
-            <img src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/youtubeicon65.png" alt="YouTube">
+            <img src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/youtubeicon65.png" alt="YouTube" crossorigin="anonymous">
           </a>
           <a href="https://github.com/cagatayuresin" target="_blank">
-            <img src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/githubicon65.png" alt="GitHub">
+            <img src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/githubicon65.png" alt="GitHub" crossorigin="anonymous">
           </a>
         </div>
       </div>
@@ -563,7 +563,7 @@
 <div id="tweaks-panel">
   <h4>Tweaks</h4>
   <div class="tweak-row">
-    <label>Font ailesi</label>
+    <label for="tweak-font">Font ailesi</label>
     <select id="tweak-font" onchange="applyTweaks()">
       <option value="DM Sans">DM Sans</option>
       <option value="Inter">Inter</option>
@@ -571,7 +571,7 @@
     </select>
   </div>
   <div class="tweak-row">
-    <label>Sonuç boyutu</label>
+    <label for="tweak-result-size">Sonuç boyutu</label>
     <input type="range" id="tweak-result-size" min="60" max="160" value="120" oninput="applyTweaks()">
   </div>
   <div class="tweak-row">
@@ -760,23 +760,23 @@ if ("serviceWorker" in navigator) {
     const CACHE = 'kaclazim-v3';
     const ASSETS = ['./', './index.html'];
     self.addEventListener('install', e => {
-      e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));
+      e.waitUntil((async () => {
+        const c = await caches.open(CACHE);
+        await c.addAll(ASSETS);
+      })());
     });
     self.addEventListener('fetch', e => {
-      e.respondWith(
-        caches.match(e.request).then(r => r || fetch(e.request))
-      );
+      e.respondWith((async () => {
+        const r = await caches.match(e.request);
+        return r || fetch(e.request);
+      })());
     });
   `;
   const blob = new Blob([swCode], { type: 'application/javascript' });
   const swUrl = URL.createObjectURL(blob);
-  (async () => {
-    try {
-      await navigator.serviceWorker.register(swUrl);
-    } catch (e) {
-      // SW registration failed
-    }
-  })();
+  navigator.serviceWorker.register(swUrl).catch(err => {
+    console.error("Service Worker registration failed:", err);
+  });
 }
 
 globalThis.onload = loadCourses;
