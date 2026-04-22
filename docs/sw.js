@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kaclazim-v2.2';
+const CACHE_NAME = 'kaclazim-v3.0';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

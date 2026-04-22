@@ -5,7 +5,7 @@ const elts = {
   text2: document.getElementById("text2"),
 };
 
-var texts = [
+const texts = [
   "kaç lazım",
   "---",
   "sana",
@@ -78,7 +78,6 @@ function doMorph() {
 }
 
 function setMorph(fraction) {
-  // fraction = Math.cos(fraction * Math.PI) / -2 + .5;
 
   elts.text2.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
   elts.text2.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;

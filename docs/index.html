@@ -11,6 +11,8 @@
   <meta name="apple-mobile-web-app-title" content="kaç lazım">
   <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/curesinlogo.png">
   <link rel="manifest" href="data:application/json;charset=utf-8,%7B%22name%22%3A%22ka%C3%A7%20laz%C4%B1m%22%2C%22short_name%22%3A%22ka%C3%A7%20laz%C4%B1m%22%2C%22description%22%3A%22vize%20notun%20belli%20de%20finalden%20ka%C3%A7%20alman%20laz%C4%B1m%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23ffffff%22%2C%22theme_color%22%3A%22%23000000%22%2C%22orientation%22%3A%22portrait%22%7D">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -470,9 +472,7 @@
     </p>
 
     <div class="left-footer">
-      <img class="curesin-logo"
-        src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/curesinlogo.png"
-        alt="cagatayuresin">
+      <img class="curesin-logo" src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/curesinlogo.png" alt="cagatayuresin">
       <div class="left-footer-right">
         <div class="curesin-name">cagatayuresin</div>
         <div class="social-links">
@@ -503,27 +503,27 @@
 
     <div class="form-section">
       <div class="field">
-        <label>ders adı <span class="optional">isteğe bağlı</span></label>
+        <label for="ders_adi">ders adı <span class="optional">isteğe bağlı</span></label>
         <input type="text" id="ders_adi" placeholder="matematik" autocomplete="off">
       </div>
 
       <div class="field-row">
         <div class="field">
-          <label>final barajı</label>
+          <label for="final_baraji">final barajı</label>
           <input type="number" id="final_baraji" value="50" min="0" max="100" inputmode="numeric">
         </div>
         <div class="field">
-          <label>geçme notu</label>
+          <label for="gecme_notu">geçme notu</label>
           <input type="number" id="gecme_notu" value="50" min="0" max="100" inputmode="numeric">
         </div>
         <div class="field">
-          <label>final etkisi %</label>
+          <label for="final_etki_yuzde">final etkisi %</label>
           <input type="number" id="final_etki_yuzde" value="60" min="0" max="100" inputmode="numeric">
         </div>
       </div>
 
       <div class="field field--vize">
-        <label>vize notun</label>
+        <label for="vize_notu">vize notun</label>
         <input type="number" id="vize_notu" min="0" max="100" inputmode="numeric" placeholder="0">
       </div>
 
@@ -583,11 +583,11 @@
 
 <script>
 // ── Tweaks ──
-window.addEventListener('message', e => {
+globalThis.addEventListener('message', e => {
   if (e.data?.type === '__activate_edit_mode')   document.getElementById('tweaks-panel').classList.add('visible');
   if (e.data?.type === '__deactivate_edit_mode') document.getElementById('tweaks-panel').classList.remove('visible');
 });
-window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+globalThis.parent.postMessage({ type: '__edit_mode_available' }, '*');
 
 function applyTweaks() {
   const font  = document.getElementById('tweak-font').value;
@@ -596,7 +596,7 @@ function applyTweaks() {
   document.body.style.setProperty('--ff-sans', `'${font}', system-ui, sans-serif`);
   document.querySelector('.result-number').style.fontSize   = size + 'px';
   document.querySelector('.result-number').style.fontFamily = serif ? 'Georgia, serif' : 'var(--ff-mono)';
-  window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { resultSize: parseInt(size), fontFamily: font, serifNumbers: serif } }, '*');
+  globalThis.parent.postMessage({ type: '__edit_mode_set_keys', edits: { resultSize: Number.parseInt(size), fontFamily: font, serifNumbers: serif } }, '*');
 }
 
 // ── Morphing text ──
@@ -639,23 +639,27 @@ function doCooldown() {
   requestAnimationFrame(animate);
   const now = new Date(), inc = cooldown > 0, dt = (now-time)/1000;
   time = now; cooldown -= dt;
-  if (cooldown <= 0) { if (inc) textIndex++; doMorph(); } else doCooldown();
+  if (cooldown <= 0) { 
+    if (inc) {
+      textIndex++;
+    }
+    doMorph(); 
+  } else {
+    doCooldown();
+  }
 })();
 
 // ── Calculation ──
 function kaclazim() {
-  const v  = parseFloat(document.getElementById("vize_notu").value);
-  const fb = parseFloat(document.getElementById("final_baraji").value);
-  const gn = parseFloat(document.getElementById("gecme_notu").value);
-  const fe = parseFloat(document.getElementById("final_etki_yuzde").value);
-  const donut = document.getElementById("donut");
-  const sub   = document.getElementById("sonuc-sub");
-  const area  = document.getElementById("result-area");
+  const v  = Number.parseFloat(document.getElementById("vize_notu").value);
+  const fb = Number.parseFloat(document.getElementById("final_baraji").value);
+  const gn = Number.parseFloat(document.getElementById("gecme_notu").value);
+  const fe = Number.parseFloat(document.getElementById("final_etki_yuzde").value);
 
   if (document.getElementById("vize_notu").value.toLowerCase() === "elif") {
     setResult("∞", "bi' tanem ❤️", "state--normal"); return;
   }
-  if (isNaN(v)||v<0||v>100||isNaN(fb)||fb<0||fb>100||isNaN(gn)||gn<0||gn>100||isNaN(fe)||fe<=0||fe>100) {
+  if (Number.isNaN(v)||v<0||v>100||Number.isNaN(fb)||fb<0||fb>100||Number.isNaN(gn)||gn<0||gn>100||Number.isNaN(fe)||fe<=0||fe>100) {
     setResult("!", "beş kardeş — geçerli değer gir", ""); return;
   }
 
@@ -736,7 +740,7 @@ function dersSil() {
 
 // ── PWA install prompt ──
 let deferredPrompt = null;
-window.addEventListener("beforeinstallprompt", e => {
+globalThis.addEventListener("beforeinstallprompt", e => {
   e.preventDefault();
   deferredPrompt = e;
   document.getElementById("pwa-banner").classList.add("show");
@@ -744,7 +748,7 @@ window.addEventListener("beforeinstallprompt", e => {
 document.getElementById("pwa-install").addEventListener("click", async () => {
   if (!deferredPrompt) return;
   deferredPrompt.prompt();
-  const { outcome } = await deferredPrompt.userChoice;
+  await deferredPrompt.userChoice;
   deferredPrompt = null;
   document.getElementById("pwa-banner").classList.remove("show");
 });
@@ -766,10 +770,16 @@ if ("serviceWorker" in navigator) {
   `;
   const blob = new Blob([swCode], { type: 'application/javascript' });
   const swUrl = URL.createObjectURL(blob);
-  navigator.serviceWorker.register(swUrl).catch(() => {});
+  (async () => {
+    try {
+      await navigator.serviceWorker.register(swUrl);
+    } catch (e) {
+      // SW registration failed
+    }
+  })();
 }
 
-window.onload = loadCourses;
+globalThis.onload = loadCourses;
 </script>
 </body>
 </html>
