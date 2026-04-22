@@ -1,0 +1,30 @@
+{
+  "name": "kaclazim",
+  "version": "1.0.0",
+  "description": "[![GitHub license](https://img.shields.io/github/license/cagatayuresin/kaclazim?style=for-the-badge)](https://github.com/cagatayuresin/kaclazim/blob/main/LICENSE)\r [![GitHub repo size](https://img.shields.io/github/repo-size/cagatayuresin/kaclazim?style=for-the-badge)](https://github.com/cagatayuresin/kaclazim)\r [![GitHub stars](https://img.shields.io/github/stars/cagatayuresin/kaclazim?style=for-the-badge)](https://github.com/cagatayuresin/kaclazim/stargazers)\r [![GitHub forks](https://img.shields.io/github/forks/cagatayuresin/kaclazim?style=for-the-badge)](https://github.com/cagatayuresin/kaclazim/network/members)",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "coverage": "vitest run --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cagatayuresin/kaclazim.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/cagatayuresin/kaclazim/issues"
+  },
+  "homepage": "https://github.com/cagatayuresin/kaclazim#readme",
+  "devDependencies": {
+    "@vitest/coverage-v8": "^4.1.5",
+    "jsdom": "^29.0.2",
+    "vitest": "^4.1.5"
+  }
+}

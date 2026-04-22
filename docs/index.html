@@ -581,13 +581,14 @@
   </div>
 </div>
 
-<script>
+<script type="module">
 // ── Tweaks ──
 globalThis.addEventListener('message', e => {
   if (e.data?.type === '__activate_edit_mode')   document.getElementById('tweaks-panel').classList.add('visible');
   if (e.data?.type === '__deactivate_edit_mode') document.getElementById('tweaks-panel').classList.remove('visible');
 });
 globalThis.parent.postMessage({ type: '__edit_mode_available' }, '*');
+globalThis.applyTweaks = applyTweaks;
 
 function applyTweaks() {
   const font  = document.getElementById('tweak-font').value;
@@ -650,6 +651,7 @@ function doCooldown() {
 })();
 
 // ── Calculation ──
+globalThis.kaclazim = kaclazim;
 function kaclazim() {
   const v  = Number.parseFloat(document.getElementById("vize_notu").value);
   const fb = Number.parseFloat(document.getElementById("final_baraji").value);
@@ -659,17 +661,20 @@ function kaclazim() {
   if (document.getElementById("vize_notu").value.toLowerCase() === "elif") {
     setResult("∞", "bi' tanem ❤️", "state--normal"); return;
   }
-  if (Number.isNaN(v)||v<0||v>100||Number.isNaN(fb)||fb<0||fb>100||Number.isNaN(gn)||gn<0||gn>100||Number.isNaN(fe)||fe<=0||fe>100) {
+  
+  if (!validateInputs(v, fb, gn, fe)) {
     setResult("!", "beş kardeş — geçerli değer gir", ""); return;
   }
 
-  let sonuc = (gn - (v*(100-fe)/100)) * 100 / fe;
-  if (sonuc < fb) sonuc = fb;
-  const s = Math.ceil(sonuc);
+  const sonuc = calculateRequired(v, fb, gn, fe);
 
-  if (s > 100)    setResult(s + " 💀", "geçmiş olsun — bu dersten geçmen imkansız", "state--impossible");
-  else if (s <= 0) setResult("0 🎉", "zaten geçtin bile — final barajını geç yeter", "state--passed");
-  else             setResult(s, "finalden bu kadar almak lazım", "state--normal");
+  if (sonuc > 100) {
+    setResult(sonuc + " 💀", "geçmiş olsun — bu dersten geçmen imkansız", "state--impossible");
+  } else if (sonuc <= 0) {
+    setResult("0 🎉", "zaten geçtin bile — final barajını geç yeter", "state--passed");
+  } else {
+    setResult(sonuc, "finalden bu kadar almak lazım", "state--normal");
+  }
 }
 
 function setResult(val, subText, state) {
@@ -690,7 +695,12 @@ function setResult(val, subText, state) {
 
 document.addEventListener("keydown", e => { if (e.key === "Enter") kaclazim(); });
 
-// ── Course management ──
+// ── Course Management ──
+globalThis.loadCourses = loadCourses;
+globalThis.dersKaydet = dersKaydet;
+globalThis.dersYukle = dersYukle;
+globalThis.dersSil = dersSil;
+
 let savedCourses = JSON.parse(localStorage.getItem("kaclazim_courses")) || {};
 let activeCourse = null;
 
@@ -774,9 +784,11 @@ if ("serviceWorker" in navigator) {
   `;
   const blob = new Blob([swCode], { type: 'application/javascript' });
   const swUrl = URL.createObjectURL(blob);
-  navigator.serviceWorker.register(swUrl).catch(err => {
+  try {
+    await navigator.serviceWorker.register(swUrl);
+  } catch (err) {
     console.error("Service Worker registration failed:", err);
-  });
+  }
 }
 
 globalThis.onload = loadCourses;

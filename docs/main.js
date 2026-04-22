@@ -63,7 +63,8 @@ let cooldown = cooldownTime;
 elts.text1.textContent = texts[textIndex % texts.length];
 elts.text2.textContent = texts[(textIndex + 1) % texts.length];
 
-function doMorph() {
+globalThis.doMorph = doMorph;
+export function doMorph() {
   morph -= cooldown;
   cooldown = 0;
 
@@ -77,7 +78,8 @@ function doMorph() {
   setMorph(fraction);
 }
 
-function setMorph(fraction) {
+globalThis.setMorph = setMorph;
+export function setMorph(fraction) {
 
   elts.text2.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
   elts.text2.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
@@ -90,7 +92,8 @@ function setMorph(fraction) {
   elts.text2.textContent = texts[(textIndex + 1) % texts.length];
 }
 
-function doCooldown() {
+globalThis.doCooldown = doCooldown;
+export function doCooldown() {
   morph = 0;
 
   elts.text2.style.filter = "";
@@ -100,7 +103,8 @@ function doCooldown() {
   elts.text1.style.opacity = "0%";
 }
 
-function animate() {
+globalThis.animate = animate;
+export function animate() {
   requestAnimationFrame(animate);
 
   let newTime = new Date();
@@ -123,7 +127,8 @@ function animate() {
 animate();
 // ------------------
 
-function kaclazim() {
+globalThis.kaclazim = kaclazim;
+export function kaclazim() {
   const vize_notu = Number.parseFloat(document.getElementById("vize_notu").value);
   const final_baraji = Number.parseFloat(document.getElementById("final_baraji").value);
   const gecme_notu = Number.parseFloat(document.getElementById("gecme_notu").value);
@@ -171,7 +176,8 @@ function kaclazim() {
 let savedCourses = JSON.parse(localStorage.getItem("kaclazim_courses")) || {};
 let activeCourse = null;
 
-function loadCourses() {
+globalThis.loadCourses = loadCourses;
+export function loadCourses() {
     const dersListesi = document.getElementById("ders_listesi");
     dersListesi.innerHTML = "";
 
@@ -189,7 +195,8 @@ function loadCourses() {
     });
 }
 
-function dersKaydet() {
+globalThis.dersKaydet = dersKaydet;
+export function dersKaydet() {
     const dersAdi = document.getElementById("ders_adi").value.trim();
     if (!dersAdi) {
         alert("lütfen kaydetmek için bir ders adı girin.");
@@ -210,7 +217,8 @@ function dersKaydet() {
     loadCourses();
 }
 
-function dersYukle(courseName) {
+globalThis.dersYukle = dersYukle;
+export function dersYukle(courseName) {
     if (!savedCourses[courseName]) return;
 
     activeCourse = courseName;
@@ -226,7 +234,8 @@ function dersYukle(courseName) {
     kaclazim();
 }
 
-function dersSil() {
+globalThis.dersSil = dersSil;
+export function dersSil() {
     const dersAdi = document.getElementById("ders_adi").value.trim();
     if (!dersAdi) return;
 
