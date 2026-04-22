@@ -1,120 +1,775 @@
 <!DOCTYPE html>
 <html lang="tr">
-
 <head>
-    <title>kaç lazım | cagatayuresin</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compitable" content="ie-edge">
-    <link rel="stylesheet" href="stylesheet.css">
-    <meta name="description" content="vize notun belli de dersten geçmen için finalden kaç almak lazım" />
-    <meta name="author" content="Çağatay ÜRESİN">
-    <meta name="keywords"
-        content="vize, final, lazım, kaç, puan, hesap, not, puan, cagatayuresin, çağatay, üresin, curesin">
-    <meta name="robots" content="index">
-    <meta property="og:title" content="kac lazim">
-    <meta property="og:description" content="vize notun belli de dersten geçmen için finalden kaç almak lazım">
-    <meta property="og:url" content="https://cagatayuresin.github.io/kaclazim/">
-    <script src="https://kit.fontawesome.com/4ed1a77e89.js" crossorigin="anonymous"></script>
-    <link rel="shortcut icon" type="image/x-icon"
-        href="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/favicon.ico">
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#000000">
-</head>
+  <title>kaç lazım</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="vize notun belli de dersten geçmen için finalden kaç almak lazım">
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="kaç lazım">
+  <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/curesinlogo.png">
+  <link rel="manifest" href="data:application/json;charset=utf-8,%7B%22name%22%3A%22ka%C3%A7%20laz%C4%B1m%22%2C%22short_name%22%3A%22ka%C3%A7%20laz%C4%B1m%22%2C%22description%22%3A%22vize%20notun%20belli%20de%20finalden%20ka%C3%A7%20alman%20laz%C4%B1m%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23ffffff%22%2C%22theme_color%22%3A%22%23000000%22%2C%22orientation%22%3A%22portrait%22%7D">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --black:   #000000;
+      --gray-10: #111111;
+      --gray-20: #222222;
+      --gray-40: #444444;
+      --gray-60: #666666;
+      --gray-80: #888888;
+      --gray-90: #999999;
+      --gray-c:  #cccccc;
+      --gray-e:  #eeeeee;
+      --gray-f5: #f5f5f5;
+      --white:   #ffffff;
+      --ff-sans: 'DM Sans', system-ui, sans-serif;
+      --ff-mono: 'DM Mono', 'Courier New', monospace;
+      --ease: cubic-bezier(.4,0,.2,1);
+      --ease-spring: cubic-bezier(.34,1.56,.64,1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--ff-sans);
+      font-weight: 400;
+      background: var(--white);
+      color: var(--black);
+      line-height: 1.4;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Layout ─────────────────────────────────── */
+    .layout {
+      display: grid;
+      grid-template-columns: 44% 56%;
+      min-height: 100vh;
+    }
+
+    /* ─── Left panel ──────────────────────────────── */
+    .panel-left {
+      background: var(--black);
+      color: var(--white);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 48px 44px;
+      overflow: hidden;
+    }
+
+    .brand {
+      font-family: var(--ff-mono);
+      font-size: 11px;
+      letter-spacing: .18em;
+      color: var(--gray-80);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand::before {
+      content: '';
+      display: inline-block;
+      width: 6px; height: 6px;
+      background: var(--white);
+      border-radius: 50%;
+      animation: pulse 3s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; }
+      50%      { opacity: .3; }
+    }
+
+    #morph-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #thefilterdiv { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+    #morph-inner {
+      filter: url(#threshold) blur(0.4px);
+      position: relative;
+      width: 100%;
+    }
+
+    #text1, #text2 {
+      position: absolute;
+      left: 0; width: 100%;
+      font-family: var(--ff-sans);
+      font-size: clamp(28px, 3.6vw, 52px);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--white);
+      user-select: none;
+      white-space: pre-wrap;
+    }
+    #text2 { position: relative; opacity: 0; }
+
+    .tagline {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--gray-80);
+      line-height: 1.7;
+      border-top: 1px solid var(--gray-20);
+      padding-top: 24px;
+    }
+
+    .left-footer {
+      margin-top: 24px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .curesin-logo {
+      height: 36px;
+      opacity: .85;
+      filter: invert(1);
+      flex-shrink: 0;
+      transition: opacity .2s;
+    }
+    .curesin-logo:hover { opacity: 1; }
+    .left-footer-right { display: flex; flex-direction: column; gap: 6px; }
+    .curesin-name { font-family: var(--ff-mono); font-size: 10px; letter-spacing: .12em; color: var(--gray-60); }
+    .social-links { display: flex; gap: 8px; align-items: center; }
+    .social-links a { display: flex; align-items: center; }
+    .social-links img {
+      width: 16px; height: 16px;
+      filter: invert(1);
+      opacity: .4;
+      transition: opacity .15s, transform .15s var(--ease-spring);
+      object-fit: contain;
+    }
+    .social-links img:hover { opacity: 1; transform: scale(1.2); }
+
+    /* ─── Right panel ─────────────────────────────── */
+    .panel-right {
+      background: var(--white);
+      padding: 48px 52px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ─── Chips ───────────────────────────────────── */
+    #ders_listesi {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      min-height: 24px;
+      margin-bottom: 40px;
+    }
+
+    .ders-chip {
+      font-family: var(--ff-mono);
+      font-size: 11px;
+      letter-spacing: .1em;
+      padding: 5px 14px;
+      border: 1px solid var(--black);
+      background: transparent;
+      cursor: pointer;
+      transition: background .12s var(--ease), color .12s var(--ease), transform .15s var(--ease-spring);
+      user-select: none;
+      animation: chipPop .25s var(--ease-spring);
+    }
+    @keyframes chipPop {
+      from { opacity: 0; transform: scale(.85); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    .ders-chip:hover  { background: var(--black); color: var(--white); transform: scale(1.04); }
+    .ders-chip:active { transform: scale(.96); }
+    .ders-chip.active { background: var(--black); color: var(--white); }
+
+    /* ─── Form ────────────────────────────────────── */
+    .form-section { flex: 1; }
+
+    /* animated underline on fields */
+    .field {
+      margin-bottom: 28px;
+      position: relative;
+    }
+    .field label {
+      display: block;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--gray-60);
+      margin-bottom: 8px;
+      transition: color .15s;
+    }
+    .field:focus-within label { color: var(--black); }
+
+    .field label .optional {
+      font-weight: 300;
+      font-style: italic;
+      text-transform: none;
+      letter-spacing: 0;
+      color: var(--gray-c);
+    }
+
+    .field input[type="text"],
+    .field input[type="number"] {
+      font-family: var(--ff-mono);
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--black);
+      background: transparent;
+      border: none;
+      outline: none;
+      width: 100%;
+      padding: 6px 0 10px;
+      -moz-appearance: textfield;
+      /* animated underline via box-shadow */
+      box-shadow: 0 1.5px 0 0 var(--gray-e);
+      transition: box-shadow .2s var(--ease);
+    }
+    .field input::-webkit-inner-spin-button,
+    .field input::-webkit-outer-spin-button { -webkit-appearance: none; }
+    .field input:focus { box-shadow: 0 2px 0 0 var(--black); }
+    .field input::placeholder { color: var(--gray-c); }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .field--vize input {
+      font-size: 40px;
+      font-weight: 300;
+      letter-spacing: -.02em;
+      padding-bottom: 12px;
+    }
+
+    /* ─── Buttons ─────────────────────────────────── */
+    .actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: var(--ff-sans);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: .06em;
+      padding: 11px 24px;
+      background: transparent;
+      border: 1.5px solid var(--black);
+      color: var(--black);
+      cursor: pointer;
+      -webkit-appearance: none;
+      transition:
+        background .12s var(--ease),
+        color .12s var(--ease),
+        transform .15s var(--ease-spring),
+        box-shadow .15s var(--ease);
+    }
+    .btn:hover {
+      background: var(--black);
+      color: var(--white);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,.15);
+    }
+    .btn:active { transform: scale(.96) translateY(0); box-shadow: none; }
+
+    .btn--primary { background: var(--black); color: var(--white); }
+    .btn--primary:hover { background: var(--gray-20); }
+
+    .btn--ghost { border-color: var(--gray-c); color: var(--gray-60); }
+    .btn--ghost:hover { border-color: var(--black); background: transparent; color: var(--black); box-shadow: none; transform: none; }
+    .btn--ghost:active { transform: scale(.96); }
+
+    /* ─── Result ──────────────────────────────────── */
+    .result-area {
+      border-top: 1.5px solid var(--gray-e);
+      padding-top: 32px;
+      margin-bottom: 48px;
+    }
+
+    .result-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--gray-80);
+      margin-bottom: 10px;
+    }
+
+    .result-number {
+      font-family: var(--ff-mono);
+      font-size: clamp(64px, 10vw, 120px);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -.04em;
+      color: var(--black);
+      transition: color .25s var(--ease);
+      display: inline-block;
+    }
+    .result-number.pop {
+      animation: resultPop .35s var(--ease-spring);
+    }
+    @keyframes resultPop {
+      0%   { transform: scale(.9); opacity: .5; }
+      60%  { transform: scale(1.04); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .result-sub {
+      font-size: 12px;
+      color: var(--gray-80);
+      margin-top: 10px;
+      min-height: 18px;
+      font-family: var(--ff-mono);
+      letter-spacing: .06em;
+      animation: fadeUp .2s var(--ease);
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .result-area.state--impossible .result-number { color: var(--gray-80); }
+    .result-area.state--passed    .result-number { color: var(--gray-60); }
+    .result-area.state--normal    .result-number { color: var(--black); }
+
+    /* ─── Footer ──────────────────────────────────── */
+    .right-footer {
+      margin-top: auto;
+      border-top: 1px solid var(--gray-e);
+      padding-top: 20px;
+    }
+    .disclaimer {
+      font-size: 11px;
+      color: var(--gray-90);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+    .version {
+      font-family: var(--ff-mono);
+      font-size: 10px;
+      color: var(--gray-c);
+      letter-spacing: .08em;
+      margin-top: 8px;
+    }
+    .version a { color: var(--gray-c); text-decoration: none; transition: color .15s; }
+    .version a:hover { color: var(--black); }
+
+    /* ─── PWA install banner ──────────────────────── */
+    #pwa-banner {
+      display: none;
+      position: fixed;
+      bottom: 20px; left: 50%; transform: translateX(-50%);
+      background: var(--black); color: var(--white);
+      font-family: var(--ff-mono);
+      font-size: 11px;
+      letter-spacing: .08em;
+      padding: 12px 20px;
+      gap: 14px;
+      align-items: center;
+      z-index: 999;
+      white-space: nowrap;
+      animation: bannerIn .3s var(--ease-spring);
+      box-shadow: 0 8px 32px rgba(0,0,0,.25);
+    }
+    #pwa-banner.show { display: flex; }
+    @keyframes bannerIn {
+      from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+    #pwa-banner button {
+      font-family: var(--ff-mono);
+      font-size: 11px;
+      letter-spacing: .08em;
+      background: var(--white);
+      color: var(--black);
+      border: none;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: opacity .15s;
+    }
+    #pwa-banner button:hover { opacity: .8; }
+    #pwa-banner .dismiss {
+      background: transparent;
+      color: var(--gray-60);
+      padding: 0;
+    }
+
+    /* ─── Mobile ──────────────────────────────────── */
+    @media (max-width: 768px) {
+      .layout { grid-template-columns: 1fr; }
+      .panel-left { position: relative; height: auto; min-height: 44vh; padding: 36px 28px; }
+      #morph-container { min-height: 120px; }
+      .panel-right { padding: 36px 28px; }
+      .field-row { grid-template-columns: 1fr; gap: 0; }
+      .result-number { font-size: clamp(72px, 22vw, 120px); }
+    }
+    @media (max-width: 480px) {
+      .panel-left { padding: 28px 20px; }
+      .panel-right { padding: 28px 20px; }
+    }
+
+    /* ─── Tweaks ──────────────────────────────────── */
+    #tweaks-panel {
+      display: none;
+      position: fixed; bottom: 24px; right: 24px;
+      background: var(--white);
+      border: 1.5px solid var(--black);
+      padding: 20px; width: 220px;
+      z-index: 9999;
+      font-family: var(--ff-sans);
+      animation: fadeUp .2s var(--ease);
+    }
+    #tweaks-panel.visible { display: block; }
+    #tweaks-panel h4 { font-size: 10px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; margin-bottom: 16px; }
+    .tweak-row { margin-bottom: 14px; }
+    .tweak-row label { display: block; font-size: 11px; color: var(--gray-60); margin-bottom: 5px; }
+    .tweak-row select, .tweak-row input[type=range] { width: 100%; font-family: var(--ff-mono); font-size: 11px; border: 1px solid var(--gray-e); background: transparent; padding: 4px 6px; cursor: pointer; }
+  </style>
+</head>
 <body>
-    <div id="thefilterdiv">
-        <svg id="filters">
-            <defs>
-                <filter id="threshold">
-                    <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0
-                                        0 1 0 0 0
-                                        0 0 1 0 0
-                                        0 0 0 255 -140" />
-                </filter>
-            </defs>
-        </svg>
-    </div>
-    <div id="container">
+
+<div id="thefilterdiv" style="position:absolute;width:0;height:0;overflow:hidden;">
+  <svg><defs>
+    <filter id="threshold">
+      <feColorMatrix in="SourceGraphic" type="matrix"
+        values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 255 -140"/>
+    </filter>
+  </defs></svg>
+</div>
+
+<div class="layout">
+
+  <!-- ── LEFT ── -->
+  <aside class="panel-left">
+    <div class="brand">kaç lazım</div>
+
+    <div id="morph-container">
+      <div id="morph-inner">
         <span id="text1"></span>
         <span id="text2"></span>
+      </div>
     </div>
-    <div id="ders_listesi"></div>
-    <div id="formdiv">
-        <form action="/" method="POST" onsubmit="return false;">
-            <label for="ders_adi">ders adı (isteğe bağlı)</label><br>
-            <input type="text" name="ders_adi" id="ders_adi" placeholder="matematik"><br>
-            <label for="final_baraji">final barajı</label><br>
-            <input type="number" name="final_baraji" id="final_baraji" value="50" min="0" max="100"><br>
-            <label for="gecme_notu">geçme notu</label><br>
-            <input type="number" name="gecme_notu" id="gecme_notu" value="50" min="0" max="100"><br>
-            <label for="final_etki_yuzdesi">finalin yüzdelik etkisi</label><br>
-            <input type="number" name="final_etki_yuzde" id="final_etki_yuzde" value="60" min="0" max="100"><br>
-            <label for="vize_notu" id="vize_notu_label">vize notun</label><br>
-            <input type="number" name="vize_notu" id="vize_notu" min="0" max="100"><br><br>
-            <div id="button_group">
-                <input type="button" onclick="kaclazim();" name="hesabla_butonu" id="hesapla_butonu" value="hesapla">
-                <input type="button" onclick="dersKaydet();" name="kaydet_butonu" id="kaydet_butonu" value="kaydet">
-                <input type="button" onclick="dersSil();" name="sil_butonu" id="sil_butonu" value="sil">
-            </div><br>
-            <p id="sonuc">sana şu lazım<br>
-            <p id="donut">vize notu</p>
-            </p>
-        </form>
-    </div>
-    <div id="curesinlogodiv">
-        <img id="curesinlogo"
-            src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/curesinlogo.png">
-        <div class="curesincom">cagatayuresin</div>
-        <div>
-            <tr>
-                <td><a href="https://twitter.com/cagatayuresin" target="_blank"><img class="socialcom"
-                            src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/twittericon65.png"></a>
-                </td>
-            </tr>
-            <tr>
-                <td><a href="https://www.instagram.com/cagatayuresin/" target="_blank"><img class="socialcom"
-                            src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/instagramicon65.png"></a>
-                </td>
-            </tr>
-            <tr>
-                <td><a href="https://www.linkedin.com/in/cagatayuresin/" target="_blank"><img class="socialcom"
-                            src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/linkedinicon65.png"></a>
-                </td>
-            </tr>
-            <tr>
-                <td><a href="https://www.youtube.com/channel/UCoRQRnEjfym6PC5bLN9Gy8w" target="_blank"><img
-                            class="socialcom"
-                            src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/youtubeicon65.png"></a>
-                </td>
-            </tr>
-            <tr>
-                <td><a href="https://github.com/cagatayuresin" target="_blank"><img class="socialcom"
-                            src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/githubicon65.png"></a>
-                </td>
-            </tr>
+
+    <p class="tagline">
+      vize notun belli de dersten geçmen için<br>
+      finalden kaç alman lazım?
+    </p>
+
+    <div class="left-footer">
+      <img class="curesin-logo"
+        src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/curesinlogo.png"
+        alt="cagatayuresin">
+      <div class="left-footer-right">
+        <div class="curesin-name">cagatayuresin</div>
+        <div class="social-links">
+          <a href="https://twitter.com/cagatayuresin" target="_blank">
+            <img src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/twittericon65.png" alt="Twitter">
+          </a>
+          <a href="https://www.instagram.com/cagatayuresin/" target="_blank">
+            <img src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/instagramicon65.png" alt="Instagram">
+          </a>
+          <a href="https://www.linkedin.com/in/cagatayuresin/" target="_blank">
+            <img src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/linkedinicon65.png" alt="LinkedIn">
+          </a>
+          <a href="https://www.youtube.com/channel/UCoRQRnEjfym6PC5bLN9Gy8w" target="_blank">
+            <img src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/youtubeicon65.png" alt="YouTube">
+          </a>
+          <a href="https://github.com/cagatayuresin" target="_blank">
+            <img src="https://raw.githubusercontent.com/cagatayuresin/wowsignal/main/docs/img/githubicon65.png" alt="GitHub">
+          </a>
         </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── RIGHT ── -->
+  <main class="panel-right">
+
+    <div id="ders_listesi"></div>
+
+    <div class="form-section">
+      <div class="field">
+        <label>ders adı <span class="optional">isteğe bağlı</span></label>
+        <input type="text" id="ders_adi" placeholder="matematik" autocomplete="off">
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>final barajı</label>
+          <input type="number" id="final_baraji" value="50" min="0" max="100" inputmode="numeric">
+        </div>
+        <div class="field">
+          <label>geçme notu</label>
+          <input type="number" id="gecme_notu" value="50" min="0" max="100" inputmode="numeric">
+        </div>
+        <div class="field">
+          <label>final etkisi %</label>
+          <input type="number" id="final_etki_yuzde" value="60" min="0" max="100" inputmode="numeric">
+        </div>
+      </div>
+
+      <div class="field field--vize">
+        <label>vize notun</label>
+        <input type="number" id="vize_notu" min="0" max="100" inputmode="numeric" placeholder="0">
+      </div>
+
+      <div class="actions">
+        <button class="btn btn--primary" onclick="kaclazim()">hesapla</button>
+        <button class="btn" onclick="dersKaydet()">kaydet</button>
+        <button class="btn btn--ghost" onclick="dersSil()">sil</button>
+      </div>
     </div>
 
-    <div id="footer">
-        <p id="info">
-            <strong>sorumluluk reddi</strong><br>
-            bu hesaplamanın hukuken bir geçerliliği yoktur<br>
-            hesaplanan puanın üzerinde alsan bile çan eğrisinden alacağın harf notu ile kalabilirsin, kısmet<br>
-            git bak kağıdına ama fazla puan verdiyse siler
-        </p>
-        <p id="surum">
-            <em>sürüm: 2.2</em>
-        </p>
+    <div id="result-area" class="result-area">
+      <div class="result-label">sana lazım</div>
+      <div id="donut" class="result-number">—</div>
+      <div id="sonuc-sub" class="result-sub"></div>
     </div>
-</body>
-<script type="text/javascript" src="main.js"></script>
+
+    <footer class="right-footer">
+      <p class="disclaimer">
+        bu hesaplamanın hukuken bir geçerliliği yoktur ·
+        hesaplanan puanın üzerinde alsan bile çan eğrisinden alacağın harf notu ile kalabilirsin, kısmet ·
+        git bak kağıdına ama fazla puan verdiyse siler
+      </p>
+      <p class="version">sürüm 3.0 · <a href="https://github.com/cagatayuresin">cagatayuresin</a></p>
+    </footer>
+
+  </main>
+</div>
+
+<!-- PWA install banner -->
+<div id="pwa-banner">
+  <span>telefona ekle, internetsiz çalışır</span>
+  <button id="pwa-install">ekle</button>
+  <button class="dismiss" onclick="document.getElementById('pwa-banner').classList.remove('show')">✕</button>
+</div>
+
+<!-- Tweaks -->
+<div id="tweaks-panel">
+  <h4>Tweaks</h4>
+  <div class="tweak-row">
+    <label>Font ailesi</label>
+    <select id="tweak-font" onchange="applyTweaks()">
+      <option value="DM Sans">DM Sans</option>
+      <option value="Inter">Inter</option>
+      <option value="Helvetica Neue">Helvetica Neue</option>
+    </select>
+  </div>
+  <div class="tweak-row">
+    <label>Sonuç boyutu</label>
+    <input type="range" id="tweak-result-size" min="60" max="160" value="120" oninput="applyTweaks()">
+  </div>
+  <div class="tweak-row">
+    <label>
+      <input type="checkbox" id="tweak-serif" onchange="applyTweaks()"> Serif sayı fontu
+    </label>
+  </div>
+</div>
+
 <script>
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./sw.js');
-        });
-    }
-</script>
+// ── Tweaks ──
+window.addEventListener('message', e => {
+  if (e.data?.type === '__activate_edit_mode')   document.getElementById('tweaks-panel').classList.add('visible');
+  if (e.data?.type === '__deactivate_edit_mode') document.getElementById('tweaks-panel').classList.remove('visible');
+});
+window.parent.postMessage({ type: '__edit_mode_available' }, '*');
 
+function applyTweaks() {
+  const font  = document.getElementById('tweak-font').value;
+  const size  = document.getElementById('tweak-result-size').value;
+  const serif = document.getElementById('tweak-serif').checked;
+  document.body.style.setProperty('--ff-sans', `'${font}', system-ui, sans-serif`);
+  document.querySelector('.result-number').style.fontSize   = size + 'px';
+  document.querySelector('.result-number').style.fontFamily = serif ? 'Georgia, serif' : 'var(--ff-mono)';
+  window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { resultSize: parseInt(size), fontFamily: font, serifNumbers: serif } }, '*');
+}
+
+// ── Morphing text ──
+const texts = [
+  "kaç lazım","sana kaç lazım","onu söyle","---",
+  "hocam nolur hocam","hojajım","hocaağğğm","---",
+  "ağlamayın","kalırsanız kalırsınız","delikanlı gibi","kabul edin olm","---",
+  "yazın verirsin","---","seneye verirsin nolcak","---",
+  "nasıl tasarım ama","façası yanıyo","---",
+  "animasyonu çarptım ama","çaktırmayın","---",
+  "backend bende ;)","---","frontend bilmiyorum ben","---",
+  "hoca bol keseden verse","bilemiyorum","olur gibi","---",
+  "ya olm boşverin","---","bunlar gerçek hayatta","ne işimize yarıcak ki","şaka şaka","yarıyo harbiden","---",
+  "kaç lazım",
+];
+const elts = { text1: document.getElementById("text1"), text2: document.getElementById("text2") };
+const morphTime = 1, cooldownTime = 0.5;
+let textIndex = texts.length - 1, time = new Date(), morph = 0, cooldown = cooldownTime;
+elts.text1.textContent = texts[textIndex % texts.length];
+elts.text2.textContent = texts[(textIndex + 1) % texts.length];
+
+function doMorph() {
+  morph -= cooldown; cooldown = 0;
+  let f = morph / morphTime;
+  if (f > 1) { cooldown = cooldownTime; f = 1; }
+  elts.text2.style.filter  = `blur(${Math.min(8/f-8,100)}px)`;
+  elts.text2.style.opacity = `${Math.pow(f,.4)*100}%`;
+  f = 1-f;
+  elts.text1.style.filter  = `blur(${Math.min(8/f-8,100)}px)`;
+  elts.text1.style.opacity = `${Math.pow(f,.4)*100}%`;
+  elts.text1.textContent = texts[textIndex % texts.length];
+  elts.text2.textContent = texts[(textIndex+1) % texts.length];
+}
+function doCooldown() {
+  morph = 0;
+  elts.text2.style.filter = ""; elts.text2.style.opacity = "100%";
+  elts.text1.style.filter = ""; elts.text1.style.opacity = "0%";
+}
+(function animate() {
+  requestAnimationFrame(animate);
+  const now = new Date(), inc = cooldown > 0, dt = (now-time)/1000;
+  time = now; cooldown -= dt;
+  if (cooldown <= 0) { if (inc) textIndex++; doMorph(); } else doCooldown();
+})();
+
+// ── Calculation ──
+function kaclazim() {
+  const v  = parseFloat(document.getElementById("vize_notu").value);
+  const fb = parseFloat(document.getElementById("final_baraji").value);
+  const gn = parseFloat(document.getElementById("gecme_notu").value);
+  const fe = parseFloat(document.getElementById("final_etki_yuzde").value);
+  const donut = document.getElementById("donut");
+  const sub   = document.getElementById("sonuc-sub");
+  const area  = document.getElementById("result-area");
+
+  if (document.getElementById("vize_notu").value.toLowerCase() === "elif") {
+    setResult("∞", "bi' tanem ❤️", "state--normal"); return;
+  }
+  if (isNaN(v)||v<0||v>100||isNaN(fb)||fb<0||fb>100||isNaN(gn)||gn<0||gn>100||isNaN(fe)||fe<=0||fe>100) {
+    setResult("!", "beş kardeş — geçerli değer gir", ""); return;
+  }
+
+  let sonuc = (gn - (v*(100-fe)/100)) * 100 / fe;
+  if (sonuc < fb) sonuc = fb;
+  const s = Math.ceil(sonuc);
+
+  if (s > 100)    setResult(s + " 💀", "geçmiş olsun — bu dersten geçmen imkansız", "state--impossible");
+  else if (s <= 0) setResult("0 🎉", "zaten geçtin bile — final barajını geç yeter", "state--passed");
+  else             setResult(s, "finalden bu kadar almak lazım", "state--normal");
+}
+
+function setResult(val, subText, state) {
+  const donut = document.getElementById("donut");
+  const sub   = document.getElementById("sonuc-sub");
+  const area  = document.getElementById("result-area");
+  donut.classList.remove("pop");
+  requestAnimationFrame(() => {
+    donut.textContent = val;
+    sub.textContent   = subText;
+    area.className    = "result-area " + state;
+    donut.classList.add("pop");
+    // re-trigger sub animation
+    sub.style.animation = "none";
+    requestAnimationFrame(() => { sub.style.animation = ""; });
+  });
+}
+
+document.addEventListener("keydown", e => { if (e.key === "Enter") kaclazim(); });
+
+// ── Course management ──
+let savedCourses = JSON.parse(localStorage.getItem("kaclazim_courses")) || {};
+let activeCourse = null;
+
+function loadCourses() {
+  const list = document.getElementById("ders_listesi");
+  list.innerHTML = "";
+  Object.keys(savedCourses).forEach(name => {
+    const chip = document.createElement("div");
+    chip.className = "ders-chip" + (name === activeCourse ? " active" : "");
+    chip.textContent = name;
+    chip.onclick = () => dersYukle(name);
+    list.appendChild(chip);
+  });
+}
+function dersKaydet() {
+  const adi = document.getElementById("ders_adi").value.trim();
+  if (!adi) { alert("lütfen kaydetmek için bir ders adı girin."); return; }
+  savedCourses[adi] = {
+    final_baraji:     document.getElementById("final_baraji").value,
+    gecme_notu:       document.getElementById("gecme_notu").value,
+    final_etki_yuzde: document.getElementById("final_etki_yuzde").value,
+    vize_notu:        document.getElementById("vize_notu").value
+  };
+  localStorage.setItem("kaclazim_courses", JSON.stringify(savedCourses));
+  activeCourse = adi;
+  loadCourses();
+}
+function dersYukle(name) {
+  if (!savedCourses[name]) return;
+  activeCourse = name;
+  const d = savedCourses[name];
+  document.getElementById("ders_adi").value         = name;
+  document.getElementById("final_baraji").value     = d.final_baraji;
+  document.getElementById("gecme_notu").value       = d.gecme_notu;
+  document.getElementById("final_etki_yuzde").value = d.final_etki_yuzde;
+  document.getElementById("vize_notu").value        = d.vize_notu;
+  loadCourses(); kaclazim();
+}
+function dersSil() {
+  const adi = document.getElementById("ders_adi").value.trim();
+  if (!adi || !savedCourses[adi]) return;
+  delete savedCourses[adi];
+  localStorage.setItem("kaclazim_courses", JSON.stringify(savedCourses));
+  if (activeCourse === adi) { activeCourse = null; document.getElementById("ders_adi").value = ""; }
+  loadCourses();
+}
+
+// ── PWA install prompt ──
+let deferredPrompt = null;
+window.addEventListener("beforeinstallprompt", e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById("pwa-banner").classList.add("show");
+});
+document.getElementById("pwa-install").addEventListener("click", async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  deferredPrompt = null;
+  document.getElementById("pwa-banner").classList.remove("show");
+});
+
+// ── Service Worker ──
+if ("serviceWorker" in navigator) {
+  // inline SW via blob for standalone demo
+  const swCode = `
+    const CACHE = 'kaclazim-v3';
+    const ASSETS = ['./', './index.html'];
+    self.addEventListener('install', e => {
+      e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));
+    });
+    self.addEventListener('fetch', e => {
+      e.respondWith(
+        caches.match(e.request).then(r => r || fetch(e.request))
+      );
+    });
+  `;
+  const blob = new Blob([swCode], { type: 'application/javascript' });
+  const swUrl = URL.createObjectURL(blob);
+  navigator.serviceWorker.register(swUrl).catch(() => {});
+}
+
+window.onload = loadCourses;
+</script>
+</body>
 </html>

@@ -2,6 +2,17 @@
 
 Projedeki tüm önemli değişiklikler bu dosyada kayıt altına alınacaktır.
 
+## [3.0] - 2026-04-22
+### Değişenler
+- **Tam Arayüz Yeniden Tasarımı:** Siyah/beyaz Swiss editorial kimliğe geçiş yapıldı.
+- **Split Layout:** Masaüstünde sol panel (siyah, sticky, morph animasyonu) + sağ panel (beyaz, form + sonuç) mimarisine geçildi.
+- **Yeni Font:** Oswald'dan DM Sans + DM Mono çiftine geçildi.
+- **Sonuç Ekranı:** Büyük monospace sonuç sayısı eklendi; 3 durum rengi: normal / imkansız / zaten geçtin.
+- **Logo & Sosyal Medya:** Sol panel altına logo ve sosyal medya ikonları entegre edildi.
+- **Enter Kısayolu:** Enter tuşuyla hesaplama tetiklenebiliyor.
+- **Tweaks Paneli:** Prototip içi font ve boyut ayar paneli eklendi.
+- **Mobil Responsive:** Tek sütun yığılı layout ile tam mobil uyum sağlandı.
+
 ## [2.2] - 2026-04-09
 ### Eklenenler
 - **PWA Desteği:** Uygulama artık telefona yüklenebilir ve internetsiz (offline) çalışabilir.
